@@ -702,6 +702,8 @@
     <Content Include="Views\Category\Ekle.cshtml" />
     <Content Include="Views\Category\Guncelle.cshtml" />
     <Content Include="Views\Urun\StokGrafik.cshtml" />
+    <Content Include="Views\Sepet\Index.cshtml" />
+    <Content Include="Views\Sepet\SepetCount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -711,7 +713,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Sepet\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="NiceAdmin\NiceAdmin\assets\vendor\tinymce\tinymce.d.ts" />

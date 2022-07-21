@@ -1,0 +1,134 @@
+﻿@using UrunStokTakip.Models
+@model List<sepet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Session["ad"]</h2>
+
+<h3>Sepetim</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ürün Bilgisi</th>
+            <th>Adet</th>
+            <th>Fiyat</th>
+            <th>Tarih</th>
+            <th>Resim</th>
+            <th>Sil</th>
+            <th>Satın Al</th>
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.urunler.ad</td>
+
+            <td>
+                <div>
+                    @Html.ActionLink("-" , "azalt" , new { id = item.id} , new { @class = "btn btn-info btn-sm azalt"})
+                </div>
+                <div>
+                    @Html.TextBoxFor(x => item.adet , new { @class = "txt", data_id=item.id})
+                </div> 
+                <div>
+                    @Html.ActionLink("+" , "arttir" , new { id = item.id} , new { @class= "btn btn-info btn-sm arttir"})
+                </div>
+
+            </td>}0
+
+            <td>@item.urunler.fiyat</td>
+
+            <td>@Convert.ToDateTime(item.tarih).ToString("dd/mm/yyyy")</td>
+            <td><img src="~/Content/Icon/@item.resim" width="80" height="80" /></td>
+            
+            @if (User.IsInRole("U"))
+            {
+                <td>@Html.ActionLink("Sil", "Sil", new { id = item.id }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor Musnuz?')" })</td>
+                <td><a href="/Satislar/SatinAl/@item.id" class="btn btn-success">Satın Al</a></td>
+            }
+
+                
+
+                    
+
+
+
+        </tr>
+
+        }
+    </tbody>
+
+
+</table>
+
+
+<div class="container">
+    @ViewBag.tutar
+</div>
+
+<br />
+
+<div class="form-group">
+    <a href="/Satislar/HepsiniSatinAl" class="btn btn-success form-control">Tümünü Satın Al</a>
+</div>
+
+<div class="form-group">
+    <a href="/Sepet/HepsiniSil" class="btn btn-success form-control">Tümünü Sil</a>
+</div>
+
+<style>
+
+    .txt{
+        line-height:18px;
+        width:50px!important;
+        height:32px;
+        font-size:14px;
+        text-align:center;
+        border:solid 1px #ccc;
+        margin-left:23px;
+    }
+
+    .arttir{
+        display:18px;
+        cursor:pointer;
+        border:solid 1px #ccc;
+        position:absolute;
+        margin-top:-32px;
+        margin-left:75px;
+    }
+
+    .azalt{
+        display:block;
+        cursor:pointer;
+        border:solid 1px #ccc;
+        position:absolute;
+        margin-right:95;
+    }
+
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        $('.txt').on('change', function () {
+            var miktar = $(this).val();
+            var sepetid = $(this).attr('data_id');
+            $.ajax({
+                url: '/Sepet/AdetYaz',
+                data: { id: sepetid, miktari: miktar },
+                success: function (res) {
+                    document.location.reload();
+                }
+            });
+        });
+    });
+</script>
+

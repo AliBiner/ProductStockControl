@@ -32,10 +32,10 @@
                 <li><a href="/Category/Index">Kategoriler</a></li>
 
 
-                @if (User.IsInRole("A"))
+                @if (User.IsInRole("U"))
                 {
                     <li><a href="/Satis/Index">Satışlar</a></li>
-                    <li><a href="/Sepet/Index">Sepetim</a></li>
+                    <li><a href="/Sepet/Index"><img src="~/Content/Icon/addtocart.png" width="30" height="30"/><label style="color:red">@{Html.RenderAction("SepetCount", "Sepet");}</label></a></li>
                 }
 
 
