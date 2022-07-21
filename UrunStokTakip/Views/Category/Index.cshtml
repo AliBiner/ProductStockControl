@@ -1,0 +1,40 @@
+﻿@using UrunStokTakip.Models
+@model List<kategori>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<a href="/Category/Ekle" class="btn btn-primary">Ekle</a>
+<table class="table table-bordered">
+    <tr>
+        <th>Ad</th>
+        <th>Açıklama</th>
+        @if (User.IsInRole("A"))
+        {
+            <th>Sil</th>
+            <th>Düzenle</th>
+        }
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ad</td>
+            <td>@item.aciklama</td>
+            @if (User.IsInRole("A"))
+            {
+                <td>@Html.ActionLink("Sil", "Sil", new { id = item.id }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor Musnuz?')" })</td>
+                <td><a href="/Category/Guncelle/@item.id" class="btn btn-warning">Güncelle</a></td>
+
+            }
+        </tr>
+
+    }
+
+
+</table>
+

@@ -1,0 +1,36 @@
+﻿@using UrunStokTakip.Models
+@model List<urunler>
+@{
+    ViewBag.Title = "KritikStok";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+    <tr>
+        <th>Ürün Bilgisi</th>
+        <th>Stok</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item.stok < 5)
+        {
+            <tr style="background-color:red">
+                <td>@item.ad</td>
+                <td>@item.stok</td>
+            </tr>
+
+        }
+        if (item.stok == 5)
+        {
+            <tr style="background-color:yellow">
+                <td>@item.ad</td>
+                <td>@item.stok</td>
+            </tr>
+
+        }
+
+
+    }
+
+</table>
+
