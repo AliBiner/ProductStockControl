@@ -1,0 +1,44 @@
+﻿@model UrunStokTakip.Models.kullanici
+@{
+    ViewBag.Title = "Guncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<form method="post">
+    <div class="container">
+        <br />
+        <div class="form-group">
+            <label>Ad</label>
+            <input type="text" name="ad" value="@Model.ad" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Soyadı</label>
+            <input type="text" name="soyadı" value="@Model.soyadı" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Kullanıcı Adı</label>
+            <input type="text" name="kullaniciAd" value="@Model.kullaniciAd" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" value="@Model.email" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Şifre</label>
+            <input type="text" name="sifre" value="@Model.sifre" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Şifre Tekrar</label>
+            <input type="text" name="sifreTekrar" value="@Model.sifreTekrar" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Güncelle</button>d
+    </div>
+
+</form>
+

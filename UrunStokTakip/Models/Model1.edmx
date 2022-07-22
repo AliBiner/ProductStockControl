@@ -86,6 +86,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_satislar_urunler">
+          <End Role="urunler" Type="Self.urunler" Multiplicity="0..1" />
+          <End Role="satislar" Type="Self.satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="urunler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="satislar">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_sepet_kullanici">
           <End Role="kullanici" Type="Self.kullanici" Multiplicity="0..1" />
           <End Role="sepet" Type="Self.sepet" Multiplicity="*" />
@@ -131,6 +143,10 @@
           <EntitySet Name="urunler" EntityType="Self.urunler" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_satislar_kullanici" Association="Self.FK_satislar_kullanici">
             <End Role="kullanici" EntitySet="kullanici" />
+            <End Role="satislar" EntitySet="satislar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_satislar_urunler" Association="Self.FK_satislar_urunler">
+            <End Role="urunler" EntitySet="urunler" />
             <End Role="satislar" EntitySet="satislar" />
           </AssociationSet>
           <AssociationSet Name="FK_sepet_kullanici" Association="Self.FK_sepet_kullanici">
@@ -187,6 +203,7 @@
           <Property Name="resim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="kullaniciID" Type="Int32" />
           <NavigationProperty Name="kullanici" Relationship="Self.FK_satislar_kullanici" FromRole="satislar" ToRole="kullanici" />
+          <NavigationProperty Name="urunler" Relationship="MVC_StokTakipModel.FK_satislar_urunler" FromRole="satislar" ToRole="urunler" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -233,6 +250,10 @@
             <End Role="urunler" EntitySet="urunler" />
             <End Role="sepet" EntitySet="sepet" />
           </AssociationSet>
+          <AssociationSet Name="FK_satislar_urunler" Association="MVC_StokTakipModel.FK_satislar_urunler">
+            <End Role="urunler" EntitySet="urunler" />
+            <End Role="satislar" EntitySet="satislar" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sepet">
           <Key>
@@ -262,6 +283,7 @@
           <Property Name="kategoriID" Type="Int32" />
           <NavigationProperty Name="kategori" Relationship="MVC_StokTakipModel.FK_urunler_kategori" FromRole="urunler" ToRole="kategori" />
           <NavigationProperty Name="sepet" Relationship="MVC_StokTakipModel.FK_sepet_urunler" FromRole="urunler" ToRole="sepet" />
+          <NavigationProperty Name="satislar" Relationship="MVC_StokTakipModel.FK_satislar_urunler" FromRole="urunler" ToRole="satislar" />
         </EntityType>
         <Association Name="FK_urunler_kategori">
           <End Type="MVC_StokTakipModel.kategori" Role="kategori" Multiplicity="0..1" />
@@ -295,6 +317,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="sepet">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_satislar_urunler">
+          <End Type="MVC_StokTakipModel.urunler" Role="urunler" Multiplicity="0..1" />
+          <End Type="MVC_StokTakipModel.satislar" Role="satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="urunler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="satislar">
               <PropertyRef Name="urunID" />
             </Dependent>
           </ReferentialConstraint>

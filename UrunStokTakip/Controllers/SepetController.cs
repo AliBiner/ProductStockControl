@@ -37,6 +37,7 @@ namespace UrunStokTakip.Controllers
                     }
                     return View(model);
                 }
+                return View();
                 
 
             }
@@ -132,6 +133,31 @@ namespace UrunStokTakip.Controllers
             model.fiyat = model.fiyat * model.adet;
             db.SaveChanges();
 
+        }
+
+        public ActionResult Sil(int id)
+        {
+            var sil = db.sepet.Find(id);
+            db.sepet.Remove(sil);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult HepsiniSil() 
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var kullaniciadi = User.Identity.Name;
+                var model = db.kullanici.FirstOrDefault(x => x.email == kullaniciadi);
+                var sil = db.sepet.Where(x => x.kullaniciID == model.id);
+                db.sepet.RemoveRange(sil);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+
+            }
+            return HttpNotFound();
         }
     }
 }

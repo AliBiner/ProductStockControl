@@ -67,5 +67,30 @@ namespace UrunStokTakip.Controllers
 
             return RedirectToAction("Login", "Account");
         }
+
+        public ActionResult Guncelle()
+        {
+            var kullanicilar = (string)Session["mail"];
+            var degerler = db.kullanici.FirstOrDefault(x => x.email == kullanicilar);
+            return View(degerler);
+        
+        }
+
+        [HttpPost]
+
+        public ActionResult Guncelle(kullanici data)
+        {
+            var kullanicilar = (string)Session["mail"];
+            var kullanici = db.kullanici.Where(x => x.email == kullanicilar).FirstOrDefault();
+            kullanici.ad = data.ad;
+            kullanici.soyadı = data.soyadı;
+            kullanici.email = data.email;
+            kullanici.kullaniciAd = data.kullaniciAd;
+            kullanici.sifre = data.sifre;
+            kullanici.sifreTekrar = data.sifreTekrar;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+
+        }
     }
 }

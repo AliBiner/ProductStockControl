@@ -15,6 +15,7 @@
         <AssociationConnector Association="MVC_StokTakipModel.FK_urunler_kategori" />
         <AssociationConnector Association="MVC_StokTakipModel.FK_sepet_kullanici" />
         <AssociationConnector Association="MVC_StokTakipModel.FK_sepet_urunler" />
+        <AssociationConnector Association="MVC_StokTakipModel.FK_satislar_urunler" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
